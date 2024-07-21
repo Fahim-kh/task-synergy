@@ -14,7 +14,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}admin/assets/images/brand/favicon.ico" />
 
 		<!-- Title -->
-		<title>@yield('page-title') | Mega Resources</title>
+		<title>@yield('page-title') | Task </title>
 
 		<!--Bootstrap.min css-->
 		<link rel="stylesheet" href="{{ asset('') }}admin/assets/plugins/bootstrap/css/bootstrap.min.css">
@@ -135,7 +135,7 @@
 					<div class="container">
 						<div class="row align-items-center flex-row-reverse">
 							<div class="col-md-12 col-sm-12 text-center">
-								Copyright © @php echo date('Y') @endphp <a href="#">Mega Resources</a>. Designed by <a href="#">Statelyweb Pvt Ltd. UK</a> All rights reserved.
+								Copyright © @php echo date('Y') @endphp <a href="#">Task </a>. Designed by <a href="#">Fahim kh</a> All rights reserved.
 							</div>
 						</div>
 					</div>
