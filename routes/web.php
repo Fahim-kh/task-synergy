@@ -14,7 +14,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 |
 */
 Route::get('/',function(){
-    return view('welcome');
+    return view('auth.login');
 })->name('home');
 
 
@@ -28,28 +28,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']],functio
     Route::resource('/role', App\Http\Controllers\Admin\RoleController::class);
     Route::post('/role_filter', [App\Http\Controllers\Admin\RoleController::class,'filter'])->name('rolefilter');
     Route::post('/role_delete', [App\Http\Controllers\Admin\RoleController::class,'role_delete'])->name('role_delete');
-    Route::resource('/general_settings', App\Http\Controllers\Admin\GeneralSettingController::class);
-    Route::resource('/slider',App\Http\Controllers\Admin\SliderController::class);
-    Route::put('/slider/{status}/status',[App\Http\Controllers\Admin\SliderController::class,'status'])->name('slider.satatus');
-    Route::resource('/testimonial',App\Http\Controllers\Admin\TestimonialController::class);
-    Route::put('/testimonial/{status}/status',[App\Http\Controllers\Admin\TestimonialController::class,'status'])->name('testimonial.status');
-    Route::resource('/team',App\Http\Controllers\Admin\TeamController::class);
-    Route::put('/team/{status}/status',[App\Http\Controllers\Admin\TeamController::class,'status'])->name('team.status');
-    Route::resource('/services',App\Http\Controllers\Admin\ServicesController::class);
-    Route::put('/services/{status}/status',[App\Http\Controllers\Admin\ServicesController::class,'status'])->name('services.status');
-    Route::resource('/subservices',App\Http\Controllers\Admin\SubServicesController::class);
-    Route::put('/sub_service/{status}/status',[App\Http\Controllers\Admin\SubServicesController::class,'status'])->name('sub_services.status');
+    Route::resource('/department',App\Http\Controllers\Admin\DepartmentController::class);
 
-    Route::post('/services/deleteAll',[App\Http\Controllers\Admin\ServicesController::class,'deleteAll'])->name('deleteAll');
     Route::resource('/location',App\Http\Controllers\Admin\LocationController::class);
     Route::put('/location/{status}/status',[App\Http\Controllers\Admin\LocationController::class,'status'])->name('location.status');
-    Route::resource('/branch',App\Http\Controllers\Admin\BranchesController::class);
-    Route::put('/branch/{status}/status',[App\Http\Controllers\Admin\BranchesController::class,'status'])->name('branch.status');
-    Route::resource('/page',App\Http\Controllers\Admin\PagesController::class);
     Route::resource('/blog',App\Http\Controllers\Admin\BlogController::class);
-    Route::resource('/faq',App\Http\Controllers\Admin\FaqsController::class);
-    Route::put('/faq/{status}/status',[App\Http\Controllers\Admin\FaqsController::class,'status'])->name('faq.status');
-
+   
 
 });
 

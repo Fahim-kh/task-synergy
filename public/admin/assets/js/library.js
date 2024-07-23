@@ -112,7 +112,7 @@ $(document).ready(function () {
         });
         $('#deleteModal').modal('hide');
     });
-    $('.locationDelete').click(function (e) {
+    $('.departmentDelete').click(function (e) {
         e.preventDefault();
         var clickedItem = $(this);
         var id = clickedItem.data('id');
@@ -121,7 +121,9 @@ $(document).ready(function () {
     });
     $('#confirmDeleteLocation').click(function () {
         var id = $(this).data('id');
-        var deleteUrl = 'location_delete';
+        var route = $(this).data('route');
+        alert(route);
+        // var deleteUrl = route;
         var deleteData = {
             _token: token,
             id: id

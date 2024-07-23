@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2024 at 12:38 AM
+-- Generation Time: Jul 24, 2024 at 01:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,6 +48,47 @@ INSERT INTO `blogs` (`id`, `name`, `slug`, `body`, `image`, `status`, `created_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `branches`
+--
+
+CREATE TABLE `branches` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `location_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) NOT NULL,
+  `phone_optional` varchar(255) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departments`
+--
+
+CREATE TABLE `departments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'HR department', 'test', '2024-07-23 18:17:23', '2024-07-23 18:17:23'),
+(2, 'Marketing', 'adf', '2024-07-23 18:30:26', '2024-07-23 18:32:42');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -84,7 +125,8 @@ INSERT INTO `locations` (`id`, `name`, `status`, `created_at`, `updated_at`) VAL
 (2, 'Bedfordshire', 1, '2024-07-15 05:45:19', '2024-07-15 08:58:54'),
 (3, 'Hertfordshire', 1, '2024-07-15 05:45:36', '2024-07-15 09:00:15'),
 (4, 'Banbury', 0, '2024-07-15 05:45:52', '2024-07-15 09:00:28'),
-(5, 'Gloucestershire', 1, '2024-07-15 05:46:03', '2024-07-15 08:59:47');
+(5, 'Gloucestershire', 1, '2024-07-15 05:46:03', '2024-07-15 08:59:47'),
+(6, 'HR department', 1, '2024-07-23 18:15:06', '2024-07-23 18:15:06');
 
 -- --------------------------------------------------------
 
@@ -117,12 +159,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2024_07_12_165815_team', 6),
 (13, '2024_07_13_092034_add_fields_general_setting', 7),
 (14, '2024_07_13_203908_services', 8),
-(17, '2024_07_15_082002_add_fields_services', 9),
 (18, '2024_01_01_092117_create_location_models_table', 10),
-(19, '2024_01_02_000000_create_branch_models_table', 10),
-(20, '2024_07_15_203752_create_pages_models_table', 11),
 (21, '2022_04_29_103453_blog_model', 12),
-(22, '2024_07_19_143113_create_sub_services_models_table', 13);
+(24, '2024_01_02_000000_create_branch_models_table', 13),
+(25, '2024_07_23_224552_create_departments_table', 14);
 
 -- --------------------------------------------------------
 
@@ -152,7 +192,8 @@ INSERT INTO `module` (`id`, `name`, `route`, `icon`, `parent_id`, `sorting`, `cr
 (5, 'Role', 'role.index', 'user icon', 3, NULL, '2024-07-11 13:14:11', '2024-07-11 13:14:11'),
 (12, 'Locations', 'location.index', 'icon', 0, 24, '2024-07-15 05:35:35', '2024-07-15 05:35:35'),
 (13, 'Branches', 'branch.index', 'icon', 7, NULL, '2024-07-15 05:36:29', '2024-07-15 05:36:29'),
-(16, 'Blogs', 'blog.index', 'icon', 0, 24, '2024-07-18 04:46:21', '2024-07-18 04:46:21');
+(16, 'Blogs', 'blog.index', 'icon', 0, 24, '2024-07-18 04:46:21', '2024-07-18 04:46:21'),
+(18, 'Department', 'department.index', 'fa fa-settings', 0, 34, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -229,29 +270,22 @@ CREATE TABLE `role_permission` (
 --
 
 INSERT INTO `role_permission` (`id`, `role_id`, `module_id`, `pview`, `pcreate`, `pedit`, `pdelete`, `created_at`, `updated_at`) VALUES
-(206, 2, 17, 0, 0, 0, 0, '2024-07-23 17:28:04', '2024-07-23 17:28:04'),
-(207, 2, 16, 1, 0, 1, 0, '2024-07-23 17:28:04', '2024-07-23 17:28:04'),
-(208, 2, 15, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(209, 2, 14, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(210, 2, 13, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(211, 2, 12, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(212, 2, 11, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(213, 2, 10, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(214, 2, 9, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(215, 2, 8, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(216, 2, 7, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(217, 2, 6, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(218, 2, 5, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(219, 2, 4, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(220, 2, 3, 0, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(221, 2, 1, 1, 0, 0, 0, '2024-07-23 17:28:05', '2024-07-23 17:28:05'),
-(222, 1, 16, 1, 1, 1, 1, '2024-07-23 17:29:54', '2024-07-23 17:29:54'),
-(223, 1, 13, 0, 0, 0, 0, '2024-07-23 17:29:54', '2024-07-23 17:29:54'),
-(224, 1, 12, 1, 1, 1, 1, '2024-07-23 17:29:54', '2024-07-23 17:29:54'),
-(225, 1, 5, 1, 1, 1, 1, '2024-07-23 17:29:54', '2024-07-23 17:29:54'),
-(226, 1, 4, 1, 0, 0, 0, '2024-07-23 17:29:55', '2024-07-23 17:29:55'),
-(227, 1, 3, 1, 0, 0, 0, '2024-07-23 17:29:55', '2024-07-23 17:29:55'),
-(228, 1, 1, 1, 0, 0, 0, '2024-07-23 17:29:55', '2024-07-23 17:29:55');
+(229, 1, 18, 1, 1, 1, 1, '2024-07-23 18:06:02', '2024-07-23 18:06:02'),
+(230, 1, 16, 1, 1, 1, 1, '2024-07-23 18:06:02', '2024-07-23 18:06:02'),
+(231, 1, 13, 0, 0, 0, 0, '2024-07-23 18:06:02', '2024-07-23 18:06:02'),
+(232, 1, 12, 1, 1, 1, 1, '2024-07-23 18:06:02', '2024-07-23 18:06:02'),
+(233, 1, 5, 1, 1, 1, 1, '2024-07-23 18:06:02', '2024-07-23 18:06:02'),
+(234, 1, 4, 1, 0, 0, 0, '2024-07-23 18:06:02', '2024-07-23 18:06:02'),
+(235, 1, 3, 1, 0, 0, 0, '2024-07-23 18:06:02', '2024-07-23 18:06:02'),
+(236, 1, 1, 1, 0, 0, 0, '2024-07-23 18:06:02', '2024-07-23 18:06:02'),
+(237, 2, 18, 0, 0, 0, 0, '2024-07-23 18:45:38', '2024-07-23 18:45:38'),
+(238, 2, 16, 1, 0, 1, 0, '2024-07-23 18:45:38', '2024-07-23 18:45:38'),
+(239, 2, 13, 0, 0, 0, 0, '2024-07-23 18:45:38', '2024-07-23 18:45:38'),
+(240, 2, 12, 0, 0, 0, 0, '2024-07-23 18:45:38', '2024-07-23 18:45:38'),
+(241, 2, 5, 0, 0, 0, 0, '2024-07-23 18:45:39', '2024-07-23 18:45:39'),
+(242, 2, 4, 0, 0, 0, 0, '2024-07-23 18:45:39', '2024-07-23 18:45:39'),
+(243, 2, 3, 0, 0, 0, 0, '2024-07-23 18:45:39', '2024-07-23 18:45:39'),
+(244, 2, 1, 1, 0, 0, 0, '2024-07-23 18:45:39', '2024-07-23 18:45:39');
 
 -- --------------------------------------------------------
 
@@ -289,6 +323,19 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `user_image`, `email`, `email_veri
 -- Indexes for table `blogs`
 --
 ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `branches`
+--
+ALTER TABLE `branches`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `branches_location_id_foreign` (`location_id`);
+
+--
+-- Indexes for table `departments`
+--
+ALTER TABLE `departments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -363,6 +410,18 @@ ALTER TABLE `blogs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `branches`
+--
+ALTER TABLE `branches`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `departments`
+--
+ALTER TABLE `departments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -372,19 +431,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `module`
 --
 ALTER TABLE `module`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -402,7 +461,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `role_permission`
 --
 ALTER TABLE `role_permission`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -413,6 +472,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `branches`
+--
+ALTER TABLE `branches`
+  ADD CONSTRAINT `branches_location_id_foreign` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 
 --
 -- Constraints for table `role_permission`
